@@ -8,7 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #fafafa;
-  color: #e79ee3;
+  color: #212121;
   line-height: 1.5;
 }
 
@@ -20,4 +20,5 @@ img {
   display: flex;
   gap: 15px;
   padding-top: 20px;
+  color: #212121;
 }
