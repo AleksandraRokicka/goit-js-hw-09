@@ -8,7 +8,7 @@ let dataDays = document.querySelector('[data-days]'); //
 let dataHours = document.querySelector('[data-hours]');
 let dataMinutes = document.querySelector('[data-minutes]');
 let dataSeconds = document.querySelector('[data-seconds]');
-const actualDate = new Date();//zmienna z akualna data
+const actualDate = new Date(); //zmienna z akualna data
 
 const options = {
   enableTime: true, //Pokazuje czas do wyboru. Domyslnie jest false- nie ma czasu.
@@ -18,21 +18,23 @@ const options = {
   onClose(selectedDates) {
     //po zamknięciu kalendarza wybrana data jest "uruchomiona/wybrana"
     // console.log(selectedDates[0]);
-    if (selectedDates[0] < actualDate) { //jeśli wybrana data przez uzytkownika jest z przeszlosci (dalasza niz aktualna)...
-      Notiflix.Notify.warning('Please choose a date in the future');//...komunikat "proszę wybrać datę z przyszłości"
+    if (selectedDates[0] < actualDate) {
+      //jeśli wybrana data przez uzytkownika jest z przeszlosci (dalasza niz aktualna)...
+      Notiflix.Notify.warning('Please choose a date in the future'); //...komunikat "proszę wybrać datę z przyszłości"
       buttonStart.disabled = true; //... przycisk startowy jest nieaktywny
-    } else if (selectedDates[0] > actualDate) {//jeśli wybrana data przez uzytkownika jest z przyszlosci...
-      Notiflix.Notify.success('OK');//... komunikat "OK"
-      buttonStart.disabled = false;//... przycisk startowy jest aktywny
-      userDate = selectedDates[0].getTime(); //pobiera wybrany czas od uzytkownika
+    } else if (selectedDates[0] > actualDate) {
+      //jeśli wybrana data przez uzytkownika jest z przyszlosci...
+      Notiflix.Notify.success('OK'); //... komunikat "OK"
+      buttonStart.disabled = false; //... przycisk startowy jest aktywny
     }
   },
 };
 const datePicker = flatpickr(inputPickerDate, options); //pokazanie sie kalendarza
 
- function addLeadingZero(value) {//utworzenie funkcji zero wiodące
-   return String(value).padStart(2, '0');// zwraca wartość zamienioną na string i dodaje metodę padStart. 2-bo chce mieć dwucyfrową liczbę, '0' bo chcę by przed stringiem było 0. padEnd działa tak samo, tylko dodaje po stringu.
- }
+function addLeadingZero(value) {
+  //utworzenie funkcji zero wiodące
+  return String(value).padStart(2, '0'); // zwraca wartość zamienioną na string i dodaje metodę padStart. 2-bo chce mieć dwucyfrową liczbę, '0' bo chcę by przed stringiem było 0. padEnd działa tak samo, tylko dodaje po stringu.
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -53,7 +55,8 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-buttonStart.addEventListener('click', () => {//dodanie eventu na przycisk startowy-click
+buttonStart.addEventListener('click', () => {
+  //dodanie eventu na przycisk startowy-click
 
   let counter = setInterval(() => {
     //zmienna, która odlicza, ustawienie interwalu
@@ -66,8 +69,9 @@ buttonStart.addEventListener('click', () => {//dodanie eventu na przycisk starto
     dataMinutes.textContent = addLeadingZero(timer.minutes); //dobranie sie do tekstu w dataMinutes
     dataSeconds.textContent = addLeadingZero(timer.seconds); //dobranie sie do tekstu w dataSeconds
 
-    if (msCount < 1000) { //jesli czas odliczany jest mniejszy niz 1 sek to funkcja sie zatrzymuje
+    if (msCount < 1000) {
+      //jesli czas odliczany jest mniejszy niz 1 sek to funkcja sie zatrzymuje
       clearInterval(counter);
     }
-  }, 1000);//interwal co 1 sek.
+  }, 1000); //interwal co 1 sek.
 });
